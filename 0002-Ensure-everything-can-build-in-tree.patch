@@ -1,7 +1,7 @@
 From 9651ff67d845846c67e1f3443299089fa7a21749 Mon Sep 17 00:00:00 2001
 From: Ikey Doherty <michael.i.doherty@intel.com>
 Date: Fri, 13 May 2016 16:22:32 +0100
-Subject: [PATCH 2/2] Ensure everything can build in tree
+Subject: [PATCH 2/3] Ensure everything can build in tree
 
 Signed-off-by: Ikey Doherty <michael.i.doherty@intel.com>
 ---
