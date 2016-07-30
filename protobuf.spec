@@ -4,24 +4,17 @@
 #
 Name     : protobuf
 Version  : 3.0.0
-Release  : 8
-URL      : https://github.com/google/protobuf/archive/v3.0.0-beta-2.tar.gz
-Source0  : https://github.com/google/protobuf/archive/v3.0.0-beta-2.tar.gz
+Release  : 9
+URL      : https://github.com/google/protobuf/archive/v3.0.0.tar.gz
+Source0  : https://github.com/google/protobuf/archive/v3.0.0.tar.gz
 Summary  : Google's Data Interchange Format
 Group    : Development/Tools
 License  : BSD-3-Clause
 Requires: protobuf-bin
 Requires: protobuf-lib
-BuildRequires : automake
-BuildRequires : automake-dev
 BuildRequires : cmake
-BuildRequires : gettext-bin
-BuildRequires : libtool
-BuildRequires : libtool-dev
-BuildRequires : m4
 BuildRequires : pbr
 BuildRequires : pip
-BuildRequires : pkg-config-dev
 BuildRequires : python-dev
 BuildRequires : python3-dev
 BuildRequires : setuptools
@@ -63,13 +56,14 @@ lib components for the protobuf package.
 
 
 %prep
-%setup -q -n protobuf-3.0.0-beta-2
+%setup -q -n protobuf-3.0.0
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
 
 %build
-%autogen --disable-static
+export LANG=C
+%reconfigure --disable-static
 make V=1  %{?_smp_mflags}
 
 %install
@@ -146,7 +140,6 @@ rm -rf %{buildroot}
 /usr/include/google/protobuf/reflection.h
 /usr/include/google/protobuf/reflection_ops.h
 /usr/include/google/protobuf/repeated_field.h
-/usr/include/google/protobuf/repeated_field_reflection.h
 /usr/include/google/protobuf/service.h
 /usr/include/google/protobuf/source_context.pb.h
 /usr/include/google/protobuf/source_context.proto
@@ -163,6 +156,7 @@ rm -rf %{buildroot}
 /usr/include/google/protobuf/stubs/atomicops_internals_mips_gcc.h
 /usr/include/google/protobuf/stubs/atomicops_internals_pnacl.h
 /usr/include/google/protobuf/stubs/atomicops_internals_power.h
+/usr/include/google/protobuf/stubs/atomicops_internals_ppc_gcc.h
 /usr/include/google/protobuf/stubs/atomicops_internals_solaris.h
 /usr/include/google/protobuf/stubs/atomicops_internals_tsan.h
 /usr/include/google/protobuf/stubs/atomicops_internals_x86_gcc.h
