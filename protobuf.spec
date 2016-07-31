@@ -4,15 +4,17 @@
 #
 Name     : protobuf
 Version  : 3.0.0
-Release  : 9
+Release  : 10
 URL      : https://github.com/google/protobuf/archive/v3.0.0.tar.gz
 Source0  : https://github.com/google/protobuf/archive/v3.0.0.tar.gz
 Summary  : Google's Data Interchange Format
 Group    : Development/Tools
 License  : BSD-3-Clause
 Requires: protobuf-bin
+Requires: protobuf-python
 Requires: protobuf-lib
 BuildRequires : cmake
+BuildRequires : emacs
 BuildRequires : pbr
 BuildRequires : pip
 BuildRequires : python-dev
@@ -55,6 +57,14 @@ Group: Libraries
 lib components for the protobuf package.
 
 
+%package python
+Summary: python components for the protobuf package.
+Group: Default
+
+%description python
+python components for the protobuf package.
+
+
 %prep
 %setup -q -n protobuf-3.0.0
 %patch1 -p1
@@ -69,6 +79,11 @@ make V=1  %{?_smp_mflags}
 %install
 rm -rf %{buildroot}
 %make_install
+## make_install_append content
+pushd python
+python ./setup.py install --root=%{buildroot}
+popd
+## make_install_append end
 
 %files
 %defattr(-,root,root,-)
@@ -205,3 +220,7 @@ rm -rf %{buildroot}
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/*.so.*
+
+%files python
+%defattr(-,root,root,-)
+/usr/lib/python*/*
