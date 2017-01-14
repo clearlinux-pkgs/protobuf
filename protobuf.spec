@@ -4,7 +4,7 @@
 #
 Name     : protobuf
 Version  : 3.1.0
-Release  : 15
+Release  : 16
 URL      : https://github.com/google/protobuf/archive/v3.1.0.tar.gz
 Source0  : https://github.com/google/protobuf/archive/v3.1.0.tar.gz
 Summary  : Google's Data Interchange Format
@@ -20,6 +20,7 @@ BuildRequires : pip
 BuildRequires : python-dev
 BuildRequires : python3-dev
 BuildRequires : setuptools
+BuildRequires : six
 Patch1: 0001-Add-gmock-gtest-at-1.7.0.patch
 Patch2: 0002-Ensure-everything-can-build-in-tree.patch
 Patch3: 0003-Add-gtest-symlink-to-account-for-the-rest-of-the-bro.patch
@@ -73,10 +74,12 @@ python components for the protobuf package.
 
 %build
 export LANG=C
+export SOURCE_DATE_EPOCH=1484430841
 %reconfigure --disable-static
 make V=1  %{?_smp_mflags}
 
 %install
+export SOURCE_DATE_EPOCH=1484430841
 rm -rf %{buildroot}
 %make_install
 ## make_install_append content
@@ -138,7 +141,6 @@ popd
 /usr/include/google/protobuf/generated_message_util.h
 /usr/include/google/protobuf/has_bits.h
 /usr/include/google/protobuf/io/coded_stream.h
-/usr/include/google/protobuf/io/gzip_stream.h
 /usr/include/google/protobuf/io/printer.h
 /usr/include/google/protobuf/io/strtod.h
 /usr/include/google/protobuf/io/tokenizer.h
@@ -217,12 +219,20 @@ popd
 /usr/include/google/protobuf/wire_format_lite_inl.h
 /usr/include/google/protobuf/wrappers.pb.h
 /usr/include/google/protobuf/wrappers.proto
-/usr/lib64/*.so
-/usr/lib64/pkgconfig/*.pc
+/usr/lib64/libprotobuf-lite.so
+/usr/lib64/libprotobuf.so
+/usr/lib64/libprotoc.so
+/usr/lib64/pkgconfig/protobuf-lite.pc
+/usr/lib64/pkgconfig/protobuf.pc
 
 %files lib
 %defattr(-,root,root,-)
-/usr/lib64/*.so.*
+/usr/lib64/libprotobuf-lite.so.11
+/usr/lib64/libprotobuf-lite.so.11.0.0
+/usr/lib64/libprotobuf.so.11
+/usr/lib64/libprotobuf.so.11.0.0
+/usr/lib64/libprotoc.so.11
+/usr/lib64/libprotoc.so.11.0.0
 
 %files python
 %defattr(-,root,root,-)
