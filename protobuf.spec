@@ -4,7 +4,7 @@
 #
 Name     : protobuf
 Version  : 3.1.0
-Release  : 16
+Release  : 17
 URL      : https://github.com/google/protobuf/archive/v3.1.0.tar.gz
 Source0  : https://github.com/google/protobuf/archive/v3.1.0.tar.gz
 Summary  : Google's Data Interchange Format
@@ -21,6 +21,7 @@ BuildRequires : python-dev
 BuildRequires : python3-dev
 BuildRequires : setuptools
 BuildRequires : six
+BuildRequires : zlib-dev
 Patch1: 0001-Add-gmock-gtest-at-1.7.0.patch
 Patch2: 0002-Ensure-everything-can-build-in-tree.patch
 Patch3: 0003-Add-gtest-symlink-to-account-for-the-rest-of-the-bro.patch
@@ -74,12 +75,12 @@ python components for the protobuf package.
 
 %build
 export LANG=C
-export SOURCE_DATE_EPOCH=1484430841
+export SOURCE_DATE_EPOCH=1484431189
 %reconfigure --disable-static
 make V=1  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1484430841
+export SOURCE_DATE_EPOCH=1484431189
 rm -rf %{buildroot}
 %make_install
 ## make_install_append content
@@ -141,6 +142,7 @@ popd
 /usr/include/google/protobuf/generated_message_util.h
 /usr/include/google/protobuf/has_bits.h
 /usr/include/google/protobuf/io/coded_stream.h
+/usr/include/google/protobuf/io/gzip_stream.h
 /usr/include/google/protobuf/io/printer.h
 /usr/include/google/protobuf/io/strtod.h
 /usr/include/google/protobuf/io/tokenizer.h
