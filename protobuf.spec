@@ -4,7 +4,7 @@
 #
 Name     : protobuf
 Version  : 3.2.0
-Release  : 18
+Release  : 19
 URL      : https://github.com/google/protobuf/archive/v3.2.0.tar.gz
 Source0  : https://github.com/google/protobuf/archive/v3.2.0.tar.gz
 Summary  : Google's Data Interchange Format
@@ -75,17 +75,18 @@ python components for the protobuf package.
 
 %build
 export LANG=C
-export SOURCE_DATE_EPOCH=1485813819
+export SOURCE_DATE_EPOCH=1485978498
 %reconfigure --disable-static
 make V=1  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1485813819
+export SOURCE_DATE_EPOCH=1485978498
 rm -rf %{buildroot}
 %make_install
 ## make_install_append content
 pushd python
 python ./setup.py install --root=%{buildroot}
+python3 ./setup.py install --root=%{buildroot}
 popd
 ## make_install_append end
 
