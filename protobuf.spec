@@ -4,7 +4,7 @@
 #
 Name     : protobuf
 Version  : 3.4.1
-Release  : 28
+Release  : 29
 URL      : https://github.com/google/protobuf/archive/v3.4.1.tar.gz
 Source0  : https://github.com/google/protobuf/archive/v3.4.1.tar.gz
 Summary  : Google's Data Interchange Format
@@ -103,12 +103,12 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1507164556
+export SOURCE_DATE_EPOCH=1507168569
 %reconfigure --disable-static
 make V=1  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1507164556
+export SOURCE_DATE_EPOCH=1507168569
 rm -rf %{buildroot}
 %make_install
 ## make_install_append content
