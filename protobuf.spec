@@ -4,7 +4,7 @@
 #
 Name     : protobuf
 Version  : 3.4.1
-Release  : 29
+Release  : 30
 URL      : https://github.com/google/protobuf/archive/v3.4.1.tar.gz
 Source0  : https://github.com/google/protobuf/archive/v3.4.1.tar.gz
 Summary  : Google's Data Interchange Format
