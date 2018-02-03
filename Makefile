@@ -1,5 +1,5 @@
 PKG_NAME := protobuf
-URL := https://github.com/google/protobuf/archive/v3.4.1.tar.gz
-
+URL = https://github.com/google/protobuf/archive/v3.4.1.tar.gz
+ARCHIVES = 
 
 include ../common/Makefile.common

@@ -4,14 +4,13 @@
 #
 Name     : protobuf
 Version  : 3.4.1
-Release  : 32
+Release  : 33
 URL      : https://github.com/google/protobuf/archive/v3.4.1.tar.gz
 Source0  : https://github.com/google/protobuf/archive/v3.4.1.tar.gz
 Summary  : Google's Data Interchange Format
 Group    : Development/Tools
 License  : BSD-3-Clause
 Requires: protobuf-bin
-Requires: protobuf-legacypython
 Requires: protobuf-python3
 Requires: protobuf-lib
 Requires: protobuf-python
@@ -56,15 +55,6 @@ Provides: protobuf-devel
 dev components for the protobuf package.
 
 
-%package legacypython
-Summary: legacypython components for the protobuf package.
-Group: Default
-Requires: python-core
-
-%description legacypython
-legacypython components for the protobuf package.
-
-
 %package lib
 Summary: lib components for the protobuf package.
 Group: Libraries
@@ -76,7 +66,6 @@ lib components for the protobuf package.
 %package python
 Summary: python components for the protobuf package.
 Group: Default
-Requires: protobuf-legacypython
 Requires: protobuf-python3
 
 %description python
@@ -103,12 +92,12 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1507168569
+export SOURCE_DATE_EPOCH=1517684354
 %reconfigure --disable-static
-make V=1  %{?_smp_mflags}
+make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1507168569
+export SOURCE_DATE_EPOCH=1517684354
 rm -rf %{buildroot}
 %make_install
 ## make_install_append content
@@ -259,10 +248,6 @@ popd
 /usr/lib64/libprotoc.so
 /usr/lib64/pkgconfig/protobuf-lite.pc
 /usr/lib64/pkgconfig/protobuf.pc
-
-%files legacypython
-%defattr(-,root,root,-)
-/usr/lib/python2*/*
 
 %files lib
 %defattr(-,root,root,-)

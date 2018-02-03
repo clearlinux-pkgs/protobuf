@@ -1,5 +1,7 @@
 # This file contains recursive sources that require this package
 Keras
+PyQt5
 apache-hadoop
 qt-everywhere-opensource-src
+spyder
 tensorflow
