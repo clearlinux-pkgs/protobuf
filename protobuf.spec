@@ -4,12 +4,12 @@
 #
 Name     : protobuf
 Version  : 3.6.1
-Release  : 45
-URL      : https://github.com/google/protobuf/archive/v3.6.1.tar.gz
-Source0  : https://github.com/google/protobuf/archive/v3.6.1.tar.gz
+Release  : 46
+URL      : https://github.com/protocolbuffers/protobuf/releases/download/v3.6.1/protobuf-all-3.6.1.tar.gz
+Source0  : https://github.com/protocolbuffers/protobuf/releases/download/v3.6.1/protobuf-all-3.6.1.tar.gz
 Summary  : Google's Data Interchange Format
 Group    : Development/Tools
-License  : BSD-3-Clause
+License  : Apache-2.0 BSD-3-Clause
 Requires: protobuf-bin = %{version}-%{release}
 Requires: protobuf-lib = %{version}-%{release}
 Requires: protobuf-license = %{version}-%{release}
@@ -31,10 +31,8 @@ Patch2: 0002-Ensure-everything-can-build-in-tree.patch
 Patch3: 0003-Add-gtest-symlink-to-account-for-the-rest-of-the-bro.patch
 
 %description
-This is the 'v2' C++ implementation for python proto2.
-It is active when:
-PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=cpp
-PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION_VERSION=2
+The Google Mock class generator is an application that is part of cppclean.
+visit http://code.google.com/p/cppclean/
 
 %package abi
 Summary: abi components for the protobuf package.
@@ -110,15 +108,18 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1541458594
+export SOURCE_DATE_EPOCH=1541460038
 %reconfigure --disable-static
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1541458594
+export SOURCE_DATE_EPOCH=1541460038
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/protobuf
 cp LICENSE %{buildroot}/usr/share/package-licenses/protobuf/LICENSE
+cp third_party/googletest/googlemock/LICENSE %{buildroot}/usr/share/package-licenses/protobuf/third_party_googletest_googlemock_LICENSE
+cp third_party/googletest/googlemock/scripts/generator/LICENSE %{buildroot}/usr/share/package-licenses/protobuf/third_party_googletest_googlemock_scripts_generator_LICENSE
+cp third_party/googletest/googletest/LICENSE %{buildroot}/usr/share/package-licenses/protobuf/third_party_googletest_googletest_LICENSE
 %make_install
 ## install_append content
 pushd python
@@ -273,6 +274,9 @@ popd
 %files license
 %defattr(0644,root,root,0755)
 /usr/share/package-licenses/protobuf/LICENSE
+/usr/share/package-licenses/protobuf/third_party_googletest_googlemock_LICENSE
+/usr/share/package-licenses/protobuf/third_party_googletest_googlemock_scripts_generator_LICENSE
+/usr/share/package-licenses/protobuf/third_party_googletest_googletest_LICENSE
 
 %files python
 %defattr(-,root,root,-)
