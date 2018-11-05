@@ -4,17 +4,17 @@
 #
 Name     : protobuf
 Version  : 3.6.1
-Release  : 44
+Release  : 45
 URL      : https://github.com/google/protobuf/archive/v3.6.1.tar.gz
 Source0  : https://github.com/google/protobuf/archive/v3.6.1.tar.gz
 Summary  : Google's Data Interchange Format
 Group    : Development/Tools
 License  : BSD-3-Clause
-Requires: protobuf-bin
-Requires: protobuf-python3
-Requires: protobuf-lib
-Requires: protobuf-license
-Requires: protobuf-python
+Requires: protobuf-bin = %{version}-%{release}
+Requires: protobuf-lib = %{version}-%{release}
+Requires: protobuf-license = %{version}-%{release}
+Requires: protobuf-python = %{version}-%{release}
+Requires: protobuf-python3 = %{version}-%{release}
 Requires: setuptools
 Requires: six
 BuildRequires : buildreq-cmake
@@ -35,6 +35,14 @@ This is the 'v2' C++ implementation for python proto2.
 It is active when:
 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=cpp
 PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION_VERSION=2
+
+%package abi
+Summary: abi components for the protobuf package.
+Group: Default
+
+%description abi
+abi components for the protobuf package.
+
 
 %package bin
 Summary: bin components for the protobuf package.
@@ -102,25 +110,34 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1537754479
+export SOURCE_DATE_EPOCH=1541458594
 %reconfigure --disable-static
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1537754479
+export SOURCE_DATE_EPOCH=1541458594
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/protobuf
-cp LICENSE %{buildroot}/usr/share/doc/protobuf/LICENSE
+mkdir -p %{buildroot}/usr/share/package-licenses/protobuf
+cp LICENSE %{buildroot}/usr/share/package-licenses/protobuf/LICENSE
 %make_install
 ## install_append content
 pushd python
-python ./setup.py install --root=%{buildroot}
-python3 ./setup.py install --root=%{buildroot}
+python ./setup.py install --root=%{buildroot} --cpp_implementation
+python3 ./setup.py install --root=%{buildroot} --cpp_implementation
 popd
 ## install_append end
 
 %files
 %defattr(-,root,root,-)
+
+%files abi
+%defattr(-,root,root,-)
+/usr/share/abi/libprotobuf-lite.so.17.0.0.abi
+/usr/share/abi/libprotobuf-lite.so.17.abi
+/usr/share/abi/libprotobuf.so.17.0.0.abi
+/usr/share/abi/libprotobuf.so.17.abi
+/usr/share/abi/libprotoc.so.17.0.0.abi
+/usr/share/abi/libprotoc.so.17.abi
 
 %files bin
 %defattr(-,root,root,-)
@@ -254,8 +271,8 @@ popd
 /usr/lib64/libprotoc.so.17.0.0
 
 %files license
-%defattr(-,root,root,-)
-/usr/share/doc/protobuf/LICENSE
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/protobuf/LICENSE
 
 %files python
 %defattr(-,root,root,-)
