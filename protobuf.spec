@@ -4,7 +4,7 @@
 #
 Name     : protobuf
 Version  : 3.6.1
-Release  : 46
+Release  : 47
 URL      : https://github.com/protocolbuffers/protobuf/releases/download/v3.6.1/protobuf-all-3.6.1.tar.gz
 Source0  : https://github.com/protocolbuffers/protobuf/releases/download/v3.6.1/protobuf-all-3.6.1.tar.gz
 Summary  : Google's Data Interchange Format
@@ -33,14 +33,6 @@ Patch3: 0003-Add-gtest-symlink-to-account-for-the-rest-of-the-bro.patch
 %description
 The Google Mock class generator is an application that is part of cppclean.
 visit http://code.google.com/p/cppclean/
-
-%package abi
-Summary: abi components for the protobuf package.
-Group: Default
-
-%description abi
-abi components for the protobuf package.
-
 
 %package bin
 Summary: bin components for the protobuf package.
@@ -108,12 +100,12 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1541460038
+export SOURCE_DATE_EPOCH=1542752583
 %reconfigure --disable-static
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1541460038
+export SOURCE_DATE_EPOCH=1542752583
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/protobuf
 cp LICENSE %{buildroot}/usr/share/package-licenses/protobuf/LICENSE
@@ -130,15 +122,6 @@ popd
 
 %files
 %defattr(-,root,root,-)
-
-%files abi
-%defattr(-,root,root,-)
-/usr/share/abi/libprotobuf-lite.so.17.0.0.abi
-/usr/share/abi/libprotobuf-lite.so.17.abi
-/usr/share/abi/libprotobuf.so.17.0.0.abi
-/usr/share/abi/libprotobuf.so.17.abi
-/usr/share/abi/libprotoc.so.17.0.0.abi
-/usr/share/abi/libprotoc.so.17.abi
 
 %files bin
 %defattr(-,root,root,-)
