@@ -4,7 +4,7 @@
 #
 Name     : protobuf
 Version  : 3.6.1
-Release  : 53
+Release  : 54
 URL      : https://github.com/protocolbuffers/protobuf/releases/download/v3.6.1/protobuf-all-3.6.1.tar.gz
 Source0  : https://github.com/protocolbuffers/protobuf/releases/download/v3.6.1/protobuf-all-3.6.1.tar.gz
 Summary  : Google's Data Interchange Format
@@ -17,11 +17,13 @@ Requires: protobuf-python = %{version}-%{release}
 Requires: protobuf-python3 = %{version}-%{release}
 Requires: setuptools
 Requires: six
+BuildRequires : apache-maven
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-distutils3
 BuildRequires : buildreq-golang
+BuildRequires : buildreq-mvn
+BuildRequires : buildreq-php
 BuildRequires : emacs
-BuildRequires : python-dev
 BuildRequires : python3-dev
 BuildRequires : setuptools
 BuildRequires : six
@@ -49,6 +51,7 @@ Group: Development
 Requires: protobuf-lib = %{version}-%{release}
 Requires: protobuf-bin = %{version}-%{release}
 Provides: protobuf-devel = %{version}-%{release}
+Requires: protobuf = %{version}-%{release}
 
 %description dev
 dev components for the protobuf package.
@@ -99,13 +102,18 @@ python3 components for the protobuf package.
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1542752583
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1569439675
+export GCC_IGNORE_WERROR=1
+export CFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$CFLAGS -fno-lto "
+export FFLAGS="$CFLAGS -fno-lto "
+export CXXFLAGS="$CXXFLAGS -fno-lto "
 %reconfigure --disable-static
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1542752583
+export SOURCE_DATE_EPOCH=1569439675
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/protobuf
 cp LICENSE %{buildroot}/usr/share/package-licenses/protobuf/LICENSE
