@@ -4,7 +4,7 @@
 #
 Name     : protobuf
 Version  : 3.11.1
-Release  : 55
+Release  : 56
 URL      : https://github.com/protocolbuffers/protobuf/releases/download/v3.11.1/protobuf-all-3.11.1.tar.gz
 Source0  : https://github.com/protocolbuffers/protobuf/releases/download/v3.11.1/protobuf-all-3.11.1.tar.gz
 Summary  : Protocol Buffers - Google's data interchange format
