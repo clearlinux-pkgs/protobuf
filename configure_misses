@@ -1,2 +1,3 @@
 Configure miss: whether __SUNPRO_CC is declared
+Configure miss: whether -latomic is needed
 Configure miss: gtest-config

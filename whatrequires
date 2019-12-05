@@ -1,6 +1,7 @@
 # This file contains recursive sources that require this package
 apache-hadoop
-deprecated-python-dldt
 dldt
 dldt-model-optimizer
+grpc
 grpcio
+onnx
