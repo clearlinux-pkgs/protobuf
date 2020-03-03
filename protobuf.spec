@@ -4,10 +4,10 @@
 #
 Name     : protobuf
 Version  : 3.11.2
-Release  : 60
+Release  : 61
 URL      : https://github.com/protocolbuffers/protobuf/releases/download/v3.11.2/protobuf-all-3.11.2.tar.gz
 Source0  : https://github.com/protocolbuffers/protobuf/releases/download/v3.11.2/protobuf-all-3.11.2.tar.gz
-Summary  : Google's Data Interchange Format
+Summary  : Protocol Buffers - Google's data interchange format
 Group    : Development/Tools
 License  : Apache-2.0 BSD-3-Clause
 Requires: protobuf-bin = %{version}-%{release}
@@ -28,10 +28,13 @@ Patch2: 0002-Ensure-everything-can-build-in-tree.patch
 Patch3: 0003-Add-gtest-symlink-to-account-for-the-rest-of-the-bro.patch
 
 %description
-This is the 'v2' C++ implementation for python proto2.
-It is active when:
-PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=cpp
-PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION_VERSION=2
+This directory contains the Protocol Buffers runtime implementation via both a
+pure PHP package and a native c extension. The pure PHP package is intended to
+provide usability to wider range of PHP platforms, while the c extension is
+intended to provide higher performance. Both implementations provide the same
+runtime APIs and share the same generated code. Users don’t need to re-generate
+code for the same proto definition when they want to switch the implementation
+later.
 
 %package bin
 Summary: bin components for the protobuf package.
@@ -48,6 +51,7 @@ Group: Development
 Requires: protobuf-lib = %{version}-%{release}
 Requires: protobuf-bin = %{version}-%{release}
 Provides: protobuf-devel = %{version}-%{release}
+Requires: protobuf = %{version}-%{release}
 Requires: protobuf = %{version}-%{release}
 
 %description dev
@@ -101,7 +105,8 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1580238325
+export SOURCE_DATE_EPOCH=1583203784
+# -Werror is for werrorists
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$CFLAGS -fno-lto "
@@ -111,7 +116,7 @@ export CXXFLAGS="$CXXFLAGS -fno-lto "
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1580238325
+export SOURCE_DATE_EPOCH=1583203784
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/protobuf
 cp %{_builddir}/protobuf-3.11.2/LICENSE %{buildroot}/usr/share/package-licenses/protobuf/1b5a14d06dd784e88dadc5c68344be2dc13875b6
