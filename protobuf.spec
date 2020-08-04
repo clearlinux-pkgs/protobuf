@@ -82,6 +82,9 @@ python components for the protobuf package.
 Summary: python3 components for the protobuf package.
 Group: Default
 Requires: python3-core
+Provides: pypi(protobuf)
+Requires: pypi(setuptools)
+Requires: pypi(six)
 
 %description python3
 python3 components for the protobuf package.
