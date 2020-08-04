@@ -1,7 +1,8 @@
 # This file contains recursive sources that require this package
-apache-hadoop
 dldt
 dldt-model-optimizer
+google-api-core
+googleapis-common-protos
 grpc
 grpcio
 onnx
