@@ -4,13 +4,14 @@
 #
 Name     : protobuf
 Version  : 3.18.1
-Release  : 72
+Release  : 73
 URL      : https://github.com/protocolbuffers/protobuf/releases/download/v3.18.1/protobuf-all-3.18.1.tar.gz
 Source0  : https://github.com/protocolbuffers/protobuf/releases/download/v3.18.1/protobuf-all-3.18.1.tar.gz
 Summary  : Google's Data Interchange Format
 Group    : Development/Tools
 License  : Apache-2.0 BSD-3-Clause
 Requires: protobuf-bin = %{version}-%{release}
+Requires: protobuf-filemap = %{version}-%{release}
 Requires: protobuf-lib = %{version}-%{release}
 Requires: protobuf-license = %{version}-%{release}
 Requires: protobuf-python = %{version}-%{release}
@@ -32,6 +33,7 @@ For more information about cppclean, visit http://code.google.com/p/cppclean/
 Summary: bin components for the protobuf package.
 Group: Binaries
 Requires: protobuf-license = %{version}-%{release}
+Requires: protobuf-filemap = %{version}-%{release}
 
 %description bin
 bin components for the protobuf package.
@@ -49,10 +51,19 @@ Requires: protobuf = %{version}-%{release}
 dev components for the protobuf package.
 
 
+%package filemap
+Summary: filemap components for the protobuf package.
+Group: Default
+
+%description filemap
+filemap components for the protobuf package.
+
+
 %package lib
 Summary: lib components for the protobuf package.
 Group: Libraries
 Requires: protobuf-license = %{version}-%{release}
+Requires: protobuf-filemap = %{version}-%{release}
 
 %description lib
 lib components for the protobuf package.
@@ -70,6 +81,7 @@ license components for the protobuf package.
 Summary: python components for the protobuf package.
 Group: Default
 Requires: protobuf-python3 = %{version}-%{release}
+Requires: protobuf-filemap = %{version}-%{release}
 
 %description python
 python components for the protobuf package.
@@ -90,13 +102,16 @@ cd %{_builddir}/protobuf-3.18.1
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+pushd ..
+cp -a protobuf-3.18.1 buildavx2
+popd
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1633477428
+export SOURCE_DATE_EPOCH=1634254796
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$FFLAGS -fno-lto "
@@ -104,15 +119,28 @@ export FFLAGS="$FFLAGS -fno-lto "
 export CXXFLAGS="$CXXFLAGS -fno-lto "
 %reconfigure --disable-static
 make  %{?_smp_mflags}
+unset PKG_CONFIG_PATH
+pushd ../buildavx2/
+export CFLAGS="$CFLAGS -m64 -march=x86-64-v3"
+export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3"
+export FFLAGS="$FFLAGS -m64 -march=x86-64-v3"
+export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3"
+export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3"
+%reconfigure --disable-static
+make  %{?_smp_mflags}
+popd
 
 %install
-export SOURCE_DATE_EPOCH=1633477428
+export SOURCE_DATE_EPOCH=1634254796
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/protobuf
 cp %{_builddir}/protobuf-3.18.1/LICENSE %{buildroot}/usr/share/package-licenses/protobuf/1b5a14d06dd784e88dadc5c68344be2dc13875b6
 cp %{_builddir}/protobuf-3.18.1/third_party/googletest/googlemock/LICENSE %{buildroot}/usr/share/package-licenses/protobuf/5a2314153eadadc69258a9429104cd11804ea304
 cp %{_builddir}/protobuf-3.18.1/third_party/googletest/googlemock/scripts/generator/LICENSE %{buildroot}/usr/share/package-licenses/protobuf/1d4719e04eaa4909ab5a59ef5cb04d2a5517716e
 cp %{_builddir}/protobuf-3.18.1/third_party/googletest/googletest/LICENSE %{buildroot}/usr/share/package-licenses/protobuf/5a2314153eadadc69258a9429104cd11804ea304
+pushd ../buildavx2/
+%make_install_v3
+popd
 %make_install
 ## install_append content
 pushd python
@@ -120,6 +148,7 @@ python ./setup.py install --root=%{buildroot} --cpp_implementation
 python3 ./setup.py install --root=%{buildroot} --cpp_implementation
 popd
 ## install_append end
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot}/usr/share/clear/optimized-elf/ %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
@@ -127,6 +156,7 @@ popd
 %files bin
 %defattr(-,root,root,-)
 /usr/bin/protoc
+/usr/share/clear/optimized-elf/bin*
 
 %files dev
 %defattr(-,root,root,-)
@@ -258,6 +288,10 @@ popd
 /usr/lib64/pkgconfig/protobuf-lite.pc
 /usr/lib64/pkgconfig/protobuf.pc
 
+%files filemap
+%defattr(-,root,root,-)
+/usr/share/clear/filemap/filemap-protobuf
+
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libprotobuf-lite.so.29
@@ -266,6 +300,7 @@ popd
 /usr/lib64/libprotobuf.so.29.0.1
 /usr/lib64/libprotoc.so.29
 /usr/lib64/libprotoc.so.29.0.1
+/usr/share/clear/optimized-elf/lib*
 
 %files license
 %defattr(0644,root,root,0755)
