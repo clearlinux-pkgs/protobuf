@@ -24,6 +24,7 @@ BuildRequires : zlib-dev
 Patch1: 0001-Add-gmock-gtest-at-1.7.0.patch
 Patch2: 0002-Ensure-everything-can-build-in-tree.patch
 Patch3: 0003-Add-gtest-symlink-to-account-for-the-rest-of-the-bro.patch
+Provides: pypi(protobuf)
 
 %description
 The Google Mock class generator is an application that is part of cppclean.
