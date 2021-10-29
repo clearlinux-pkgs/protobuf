@@ -4,7 +4,7 @@
 #
 Name     : protobuf
 Version  : 3.18.1
-Release  : 76
+Release  : 77
 URL      : https://github.com/protocolbuffers/protobuf/releases/download/v3.18.1/protobuf-all-3.18.1.tar.gz
 Source0  : https://github.com/protocolbuffers/protobuf/releases/download/v3.18.1/protobuf-all-3.18.1.tar.gz
 Summary  : Google's Data Interchange Format
