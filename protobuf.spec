@@ -4,7 +4,7 @@
 #
 Name     : protobuf
 Version  : 3.18.1
-Release  : 80
+Release  : 81
 URL      : https://github.com/protocolbuffers/protobuf/releases/download/v3.18.1/protobuf-all-3.18.1.tar.gz
 Source0  : https://github.com/protocolbuffers/protobuf/releases/download/v3.18.1/protobuf-all-3.18.1.tar.gz
 Summary  : Google's Data Interchange Format
@@ -24,7 +24,6 @@ BuildRequires : zlib-dev
 Patch1: 0001-Add-gmock-gtest-at-1.7.0.patch
 Patch2: 0002-Ensure-everything-can-build-in-tree.patch
 Patch3: 0003-Add-gtest-symlink-to-account-for-the-rest-of-the-bro.patch
-Provides: pypi(protobuf)
 
 %description
 The Google Mock class generator is an application that is part of cppclean.
@@ -82,7 +81,6 @@ license components for the protobuf package.
 Summary: python components for the protobuf package.
 Group: Default
 Requires: protobuf-python3 = %{version}-%{release}
-Requires: protobuf-filemap = %{version}-%{release}
 
 %description python
 python components for the protobuf package.
@@ -91,6 +89,7 @@ python components for the protobuf package.
 %package python3
 Summary: python3 components for the protobuf package.
 Group: Default
+Requires: protobuf-filemap = %{version}-%{release}
 Requires: python3-core
 
 %description python3
@@ -112,7 +111,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1634254796
+export SOURCE_DATE_EPOCH=1656427039
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$FFLAGS -fno-lto "
@@ -122,9 +121,9 @@ export CXXFLAGS="$CXXFLAGS -fno-lto "
 make  %{?_smp_mflags}
 unset PKG_CONFIG_PATH
 pushd ../buildavx2/
-export CFLAGS="$CFLAGS -m64 -march=x86-64-v3"
-export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3"
-export FFLAGS="$FFLAGS -m64 -march=x86-64-v3"
+export CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3"
+export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3"
+export FFLAGS="$FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3"
 export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3"
 export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3"
 %reconfigure --disable-static
@@ -132,7 +131,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1634254796
+export SOURCE_DATE_EPOCH=1656427039
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/protobuf
 cp %{_builddir}/protobuf-3.18.1/LICENSE %{buildroot}/usr/share/package-licenses/protobuf/1b5a14d06dd784e88dadc5c68344be2dc13875b6
@@ -149,7 +148,7 @@ python ./setup.py install --root=%{buildroot} --cpp_implementation
 python3 ./setup.py install --root=%{buildroot} --cpp_implementation
 popd
 ## install_append end
-/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot}/usr/share/clear/optimized-elf/ %{buildroot}/usr/share/clear/filemap/filemap-%{name}
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
@@ -283,6 +282,9 @@ popd
 /usr/include/google/protobuf/wire_format_lite.h
 /usr/include/google/protobuf/wrappers.pb.h
 /usr/include/google/protobuf/wrappers.proto
+/usr/lib64/glibc-hwcaps/x86-64-v3/libprotobuf-lite.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libprotobuf.so
+/usr/lib64/glibc-hwcaps/x86-64-v3/libprotoc.so
 /usr/lib64/libprotobuf-lite.so
 /usr/lib64/libprotobuf.so
 /usr/lib64/libprotoc.so
@@ -295,13 +297,18 @@ popd
 
 %files lib
 %defattr(-,root,root,-)
+/usr/lib64/glibc-hwcaps/x86-64-v3/libprotobuf-lite.so.29
+/usr/lib64/glibc-hwcaps/x86-64-v3/libprotobuf-lite.so.29.0.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libprotobuf.so.29
+/usr/lib64/glibc-hwcaps/x86-64-v3/libprotobuf.so.29.0.1
+/usr/lib64/glibc-hwcaps/x86-64-v3/libprotoc.so.29
+/usr/lib64/glibc-hwcaps/x86-64-v3/libprotoc.so.29.0.1
 /usr/lib64/libprotobuf-lite.so.29
 /usr/lib64/libprotobuf-lite.so.29.0.1
 /usr/lib64/libprotobuf.so.29
 /usr/lib64/libprotobuf.so.29.0.1
 /usr/lib64/libprotoc.so.29
 /usr/lib64/libprotoc.so.29.0.1
-/usr/share/clear/optimized-elf/lib*
 
 %files license
 %defattr(0644,root,root,0755)

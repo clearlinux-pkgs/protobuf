@@ -1,12 +1,4 @@
 # This file contains recursive sources that require this package
-google-api-core
-googleapis-common-protos
-grpc
-grpcio
-grpcio-channelz
-grpcio-health-checking
-grpcio-reflection
-grpcio-tools
-onnx
-tensorboard
-tensorflow
+pypi-grpcio_channelz
+pypi-grpcio_health_checking
+pypi-grpcio_reflection
