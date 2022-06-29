@@ -4,7 +4,7 @@
 #
 Name     : protobuf
 Version  : 3.18.1
-Release  : 81
+Release  : 82
 URL      : https://github.com/protocolbuffers/protobuf/releases/download/v3.18.1/protobuf-all-3.18.1.tar.gz
 Source0  : https://github.com/protocolbuffers/protobuf/releases/download/v3.18.1/protobuf-all-3.18.1.tar.gz
 Summary  : Google's Data Interchange Format
@@ -89,6 +89,7 @@ python components for the protobuf package.
 %package python3
 Summary: python3 components for the protobuf package.
 Group: Default
+Provides: pypi(protobuf)
 Requires: protobuf-filemap = %{version}-%{release}
 Requires: python3-core
 
