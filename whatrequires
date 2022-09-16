@@ -1,4 +1,1 @@
 # This file contains recursive sources that require this package
-pypi-grpcio_channelz
-pypi-grpcio_health_checking
-pypi-grpcio_reflection
