@@ -4,7 +4,7 @@
 #
 Name     : protobuf
 Version  : 21.7
-Release  : 89
+Release  : 90
 URL      : https://github.com/protocolbuffers/protobuf/releases/download/v21.7/protobuf-all-21.7.tar.gz
 Source0  : https://github.com/protocolbuffers/protobuf/releases/download/v21.7/protobuf-all-21.7.tar.gz
 Summary  : Google's Data Interchange Format
