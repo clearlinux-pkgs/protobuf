@@ -5,7 +5,7 @@
 #
 Name     : protobuf
 Version  : 21.12
-Release  : 96
+Release  : 97
 URL      : https://github.com/protocolbuffers/protobuf/releases/download/v21.12/protobuf-all-21.12.tar.gz
 Source0  : https://github.com/protocolbuffers/protobuf/releases/download/v21.12/protobuf-all-21.12.tar.gz
 Summary  : Google's Data Interchange Format
@@ -104,7 +104,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1683224201
+export SOURCE_DATE_EPOCH=1685563938
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 export FCFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
@@ -124,7 +124,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1683224201
+export SOURCE_DATE_EPOCH=1685563938
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/protobuf
 cp %{_builddir}/protobuf-%{version}/LICENSE %{buildroot}/usr/share/package-licenses/protobuf/1b5a14d06dd784e88dadc5c68344be2dc13875b6 || :
@@ -153,9 +153,6 @@ popd
 
 %files dev
 %defattr(-,root,root,-)
-/V3/usr/lib64/libprotobuf-lite.so
-/V3/usr/lib64/libprotobuf.so
-/V3/usr/lib64/libprotoc.so
 /usr/include/google/protobuf/any.h
 /usr/include/google/protobuf/any.pb.h
 /usr/include/google/protobuf/any.proto
@@ -295,11 +292,8 @@ popd
 
 %files lib
 %defattr(-,root,root,-)
-/V3/usr/lib64/libprotobuf-lite.so.32
 /V3/usr/lib64/libprotobuf-lite.so.32.0.12
-/V3/usr/lib64/libprotobuf.so.32
 /V3/usr/lib64/libprotobuf.so.32.0.12
-/V3/usr/lib64/libprotoc.so.32
 /V3/usr/lib64/libprotoc.so.32.0.12
 /usr/lib64/libprotobuf-lite.so.32
 /usr/lib64/libprotobuf-lite.so.32.0.12
