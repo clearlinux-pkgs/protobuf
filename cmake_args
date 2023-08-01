@@ -1,0 +1,5 @@
+-Dprotobuf_BUILD_TESTS=OFF
+-Dprotobuf_ABSL_PROVIDER=package
+-Dprotobuf_BUILD_SHARED_LIBS=ON
+-Dprotobuf_USE_EXTERNAL_GTEST=ON
+-Wno-dev

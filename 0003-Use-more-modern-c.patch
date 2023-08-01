@@ -1,0 +1,25 @@
+From 0f482eccc42c75131749f69e99aa45dc70ef7f1b Mon Sep 17 00:00:00 2001
+From: William Douglas <william.douglas@intel.com>
+Date: Tue, 1 Aug 2023 15:56:44 -0700
+Subject: [PATCH] Use more modern c++
+
+---
+ python/setup.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/python/setup.py b/python/setup.py
+index 7566b60..2fab0c3 100755
+--- a/python/setup.py
++++ b/python/setup.py
+@@ -369,7 +369,7 @@ if True:
+       extra_compile_args.append('-Wno-invalid-offsetof')
+       extra_compile_args.append('-Wno-sign-compare')
+       extra_compile_args.append('-Wno-unused-variable')
+-      extra_compile_args.append('-std=c++14')
++      extra_compile_args.append('-std=c++17')
+ 
+     if sys.platform == 'darwin':
+       extra_compile_args.append('-Wno-shorten-64-to-32')
+-- 
+2.41.0
+
