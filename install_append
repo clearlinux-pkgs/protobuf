@@ -1,3 +1,4 @@
 pushd python
-pip install --root=%{buildroot} --no-deps --ignore-installed dist/*.whl
+python ./setup.py install --root=%{buildroot} --cpp_implementation
+python3 ./setup.py install --root=%{buildroot} --cpp_implementation
 popd

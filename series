@@ -1,4 +1,4 @@
-0001-pep517-workaround.patch
-0002-soversion-fix.patch
-0003-Use-more-modern-c.patch
-backport-handle-none.patch
+0001-Add-gmock-gtest-at-1.7.0.patch
+0002-Ensure-everything-can-build-in-tree.patch
+0003-Add-gtest-symlink-to-account-for-the-rest-of-the-bro.patch
+backport-fix-python-3.11.patch
