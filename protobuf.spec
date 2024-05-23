@@ -8,7 +8,7 @@
 %define keepstatic 1
 Name     : protobuf
 Version  : 26.1
-Release  : 102
+Release  : 103
 URL      : https://github.com/protocolbuffers/protobuf/releases/download/v26.1/protobuf-26.1.tar.gz
 Source0  : https://github.com/protocolbuffers/protobuf/releases/download/v26.1/protobuf-26.1.tar.gz
 Summary  : No detailed summary available
@@ -54,6 +54,7 @@ Requires: protobuf-lib = %{version}-%{release}
 Requires: protobuf-bin = %{version}-%{release}
 Provides: protobuf-devel = %{version}-%{release}
 Requires: protobuf = %{version}-%{release}
+Requires: protobuf-staticdev
 
 %description dev
 dev components for the protobuf package.
@@ -113,7 +114,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1716484857
+export SOURCE_DATE_EPOCH=1716485382
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -186,7 +187,7 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1716484857
+export SOURCE_DATE_EPOCH=1716485382
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/protobuf
 cp %{_builddir}/protobuf-%{version}/LICENSE %{buildroot}/usr/share/package-licenses/protobuf/1b5a14d06dd784e88dadc5c68344be2dc13875b6 || :
