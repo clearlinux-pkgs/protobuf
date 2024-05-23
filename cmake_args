@@ -1,0 +1,4 @@
+-D protobuf_USE_EXTERNAL_GTEST=ON
+-D protobuf_ABSL_PROVIDER=package
+-D protobuf_BUILD_SHARED_LIBS=ON
+-W no-dev
