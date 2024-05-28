@@ -8,7 +8,7 @@
 %define keepstatic 1
 Name     : protobuf
 Version  : 26.1
-Release  : 104
+Release  : 105
 URL      : https://github.com/protocolbuffers/protobuf/releases/download/v26.1/protobuf-26.1.tar.gz
 Source0  : https://github.com/protocolbuffers/protobuf/releases/download/v26.1/protobuf-26.1.tar.gz
 Summary  : No detailed summary available
@@ -17,8 +17,6 @@ License  : BSD-3-Clause MIT
 Requires: protobuf-bin = %{version}-%{release}
 Requires: protobuf-lib = %{version}-%{release}
 Requires: protobuf-license = %{version}-%{release}
-Requires: protobuf-python = %{version}-%{release}
-Requires: protobuf-python3 = %{version}-%{release}
 BuildRequires : abseil-cpp-dev
 BuildRequires : cmake
 BuildRequires : emacs
@@ -76,25 +74,6 @@ Group: Default
 license components for the protobuf package.
 
 
-%package python
-Summary: python components for the protobuf package.
-Group: Default
-Requires: protobuf-python3 = %{version}-%{release}
-
-%description python
-python components for the protobuf package.
-
-
-%package python3
-Summary: python3 components for the protobuf package.
-Group: Default
-Requires: python3-core
-Provides: pypi(protobuf)
-
-%description python3
-python3 components for the protobuf package.
-
-
 %package staticdev
 Summary: staticdev components for the protobuf package.
 Group: Default
@@ -113,7 +92,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1716489555
+export SOURCE_DATE_EPOCH=1716915221
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -171,7 +150,7 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1716489555
+export SOURCE_DATE_EPOCH=1716915221
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/protobuf
 cp %{_builddir}/protobuf-%{version}/LICENSE %{buildroot}/usr/share/package-licenses/protobuf/1b5a14d06dd784e88dadc5c68344be2dc13875b6 || :
@@ -186,11 +165,6 @@ GOAMD64=v2
 pushd clr-build
 %make_install
 popd
-## install_append content
-pushd python
-python3 dist/setup.py install --root=%{buildroot}
-popd
-## install_append end
 /usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
@@ -478,13 +452,6 @@ popd
 /usr/share/package-licenses/protobuf/1b5a14d06dd784e88dadc5c68344be2dc13875b6
 /usr/share/package-licenses/protobuf/252c7fd154ca740ae6f765d206fbd9119108a0e3
 /usr/share/package-licenses/protobuf/fdd1d72fcc979c32a5ab8ae278a2dfd967faf820
-
-%files python
-%defattr(-,root,root,-)
-
-%files python3
-%defattr(-,root,root,-)
-/usr/lib/python3*/*
 
 %files staticdev
 %defattr(-,root,root,-)

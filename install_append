@@ -1,3 +1,0 @@
-pushd python
-python3 dist/setup.py install --root=%{buildroot}
-popd
