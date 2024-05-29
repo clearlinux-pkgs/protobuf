@@ -7,10 +7,10 @@
 #
 %define keepstatic 1
 Name     : protobuf
-Version  : 26.1
-Release  : 105
-URL      : https://github.com/protocolbuffers/protobuf/releases/download/v26.1/protobuf-26.1.tar.gz
-Source0  : https://github.com/protocolbuffers/protobuf/releases/download/v26.1/protobuf-26.1.tar.gz
+Version  : 25.3
+Release  : 106
+URL      : https://github.com/protocolbuffers/protobuf/releases/download/v25.3/protobuf-25.3.tar.gz
+Source0  : https://github.com/protocolbuffers/protobuf/releases/download/v25.3/protobuf-25.3.tar.gz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-3-Clause MIT
@@ -84,15 +84,15 @@ staticdev components for the protobuf package.
 
 
 %prep
-%setup -q -n protobuf-26.1
-cd %{_builddir}/protobuf-26.1
+%setup -q -n protobuf-25.3
+cd %{_builddir}/protobuf-25.3
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1716915221
+export SOURCE_DATE_EPOCH=1717002225
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -150,7 +150,7 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1716915221
+export SOURCE_DATE_EPOCH=1717002225
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/protobuf
 cp %{_builddir}/protobuf-%{version}/LICENSE %{buildroot}/usr/share/package-licenses/protobuf/1b5a14d06dd784e88dadc5c68344be2dc13875b6 || :
@@ -172,9 +172,9 @@ popd
 
 %files bin
 %defattr(-,root,root,-)
-/V3/usr/bin/protoc-26.1.0
+/V3/usr/bin/protoc-25.3.0
 /usr/bin/protoc
-/usr/bin/protoc-26.1.0
+/usr/bin/protoc-25.3.0
 
 %files dev
 %defattr(-,root,root,-)
@@ -289,22 +289,18 @@ popd
 /usr/include/google/protobuf/compiler/python/pyi_generator.h
 /usr/include/google/protobuf/compiler/retention.h
 /usr/include/google/protobuf/compiler/ruby/ruby_generator.h
-/usr/include/google/protobuf/compiler/rust/accessors/accessor_case.h
 /usr/include/google/protobuf/compiler/rust/accessors/accessor_generator.h
 /usr/include/google/protobuf/compiler/rust/accessors/accessors.h
-/usr/include/google/protobuf/compiler/rust/accessors/helpers.h
 /usr/include/google/protobuf/compiler/rust/context.h
-/usr/include/google/protobuf/compiler/rust/crate_mapping.h
-/usr/include/google/protobuf/compiler/rust/enum.h
 /usr/include/google/protobuf/compiler/rust/generator.h
 /usr/include/google/protobuf/compiler/rust/message.h
 /usr/include/google/protobuf/compiler/rust/naming.h
 /usr/include/google/protobuf/compiler/rust/oneof.h
 /usr/include/google/protobuf/compiler/rust/relative_path.h
-/usr/include/google/protobuf/compiler/rust/rust_keywords.h
 /usr/include/google/protobuf/compiler/scc.h
 /usr/include/google/protobuf/compiler/subprocess.h
 /usr/include/google/protobuf/compiler/versions.h
+/usr/include/google/protobuf/compiler/versions_suffix.h
 /usr/include/google/protobuf/compiler/zip_writer.h
 /usr/include/google/protobuf/cpp_edition_defaults.h
 /usr/include/google/protobuf/cpp_features.pb.h
@@ -314,7 +310,6 @@ popd
 /usr/include/google/protobuf/descriptor.proto
 /usr/include/google/protobuf/descriptor_database.h
 /usr/include/google/protobuf/descriptor_legacy.h
-/usr/include/google/protobuf/descriptor_lite.h
 /usr/include/google/protobuf/descriptor_visitor.h
 /usr/include/google/protobuf/duration.pb.h
 /usr/include/google/protobuf/duration.proto
@@ -396,7 +391,6 @@ popd
 /usr/include/google/protobuf/stubs/platform_macros.h
 /usr/include/google/protobuf/stubs/port.h
 /usr/include/google/protobuf/stubs/status_macros.h
-/usr/include/google/protobuf/testing/file.h
 /usr/include/google/protobuf/text_format.h
 /usr/include/google/protobuf/thread_safe_arena.h
 /usr/include/google/protobuf/timestamp.pb.h
@@ -417,8 +411,7 @@ popd
 /usr/include/google/protobuf/wire_format_lite.h
 /usr/include/google/protobuf/wrappers.pb.h
 /usr/include/google/protobuf/wrappers.proto
-/usr/include/java/core/src/main/resources/google/protobuf/java_features.proto
-/usr/include/upb_generator/mangle.h
+/usr/include/java/core/src/main/java/com/google/protobuf/java_features.proto
 /usr/include/utf8_range.h
 /usr/include/utf8_validity.h
 /usr/lib64/cmake/protobuf/protobuf-config-version.cmake
@@ -440,12 +433,12 @@ popd
 
 %files lib
 %defattr(-,root,root,-)
-/V3/usr/lib64/libprotobuf-lite.so.26.1.0
-/V3/usr/lib64/libprotobuf.so.26.1.0
-/V3/usr/lib64/libprotoc.so.26.1.0
-/usr/lib64/libprotobuf-lite.so.26.1.0
-/usr/lib64/libprotobuf.so.26.1.0
-/usr/lib64/libprotoc.so.26.1.0
+/V3/usr/lib64/libprotobuf-lite.so.25.3.0
+/V3/usr/lib64/libprotobuf.so.25.3.0
+/V3/usr/lib64/libprotoc.so.25.3.0
+/usr/lib64/libprotobuf-lite.so.25.3.0
+/usr/lib64/libprotobuf.so.25.3.0
+/usr/lib64/libprotoc.so.25.3.0
 
 %files license
 %defattr(0644,root,root,0755)
