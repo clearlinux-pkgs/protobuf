@@ -8,7 +8,7 @@
 %define keepstatic 1
 Name     : protobuf
 Version  : 25.3
-Release  : 108
+Release  : 109
 URL      : https://github.com/protocolbuffers/protobuf/releases/download/v25.3/protobuf-25.3.tar.gz
 Source0  : https://github.com/protocolbuffers/protobuf/releases/download/v25.3/protobuf-25.3.tar.gz
 Summary  : No detailed summary available
